@@ -43,10 +43,14 @@ Plugin 'tpope/vim-fugitive'
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+filetype on 
+
 
 " Put your non-Plugin stuff after this line
 call togglebg#map("<F5>")
 
+"define BadWhitespace before using in a match
+highlight BadWhitespace ctermbg=red guibg=darkred
 
 set number
 set relativenumber
@@ -73,7 +77,11 @@ nnoremap <space> za
 let g:SimpylFold_docstring_preview=1
 set encoding=utf-8
 
-au BufNewFile,BufRead *.py
+"filetype plugin indent on
+
+"syntax on
+au BufNewFile,BufRead *.py: syntax on
+au BufNewFile,BufRead *.py:
     \ set tabstop=4
     \ set softtabstop=4
     \ set shiftwidth=4
@@ -82,12 +90,12 @@ au BufNewFile,BufRead *.py
     \ set autoindent
     \ set fileformat=unix
 
-au BufNewFile,BufRead *.js, *.html, *.css
+au BufNewFile,BufRead *.js, *.html, *.css:
     \ set tabstop=2
     \ set softtabstop=2
     \ set shiftwidth=2
 
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+au BufRead,BufNewFile *.py,*.pyw,*.c,*.h: match BadWhitespace /\s\+$/
 
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
